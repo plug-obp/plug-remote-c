@@ -1,0 +1,3 @@
+*.o
+mock_runner
+plug_server
