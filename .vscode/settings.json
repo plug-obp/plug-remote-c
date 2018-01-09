@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.tag": "htmltag",
+        "mock_runtime.h": "c"
+    }
+}
