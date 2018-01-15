@@ -1,0 +1,27 @@
+apply plugin: 'c'
+
+model {
+    components{
+        server(NativeLibrarySpec)
+
+
+        random(NativeLibrarySpec) {
+            sources {
+                c.lib library: "server", linkage: 'static'
+            }
+        }
+
+        mock(NativeLibrarySpec) {
+            sources {
+                c.lib library: "server", linkage: 'static'
+            }
+        }
+
+        plug(NativeExecutableSpec) {
+            sources {
+                c.lib library: "server", linkage: 'static'
+                c.lib library: "mock", linkage: 'static'
+            }
+        }
+    }
+}
