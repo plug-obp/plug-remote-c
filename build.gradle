@@ -4,23 +4,15 @@ model {
     components{
         server(NativeLibrarySpec)
 
-
-        random(NativeLibrarySpec) {
+        random(NativeExecutableSpec) {
             sources {
                 c.lib library: "server", linkage: 'static'
             }
         }
 
-        mock(NativeLibrarySpec) {
+        mock(NativeExecutableSpec) {
             sources {
                 c.lib library: "server", linkage: 'static'
-            }
-        }
-
-        plug(NativeExecutableSpec) {
-            sources {
-                c.lib library: "server", linkage: 'static'
-                c.lib library: "mock", linkage: 'static'
             }
         }
     }

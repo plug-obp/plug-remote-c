@@ -1,10 +1,11 @@
 #include "language_runtime_api.h"
 #include "server.h"
-#include "mock_runtime.h"
+#include "random_runtime.h"
 
 int main(int argc, char **argv) {
-	language_runtime *api = mock_getRuntime();
+	language_runtime *api = random_getRuntime();
 	int ret = start_server(atol(argv[1]), api);
-	mock_freeRuntime(api);
+	random_freeRuntime(api);
 	return ret;
 }
+

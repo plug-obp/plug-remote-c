@@ -1,9 +1,17 @@
-#include <time.h>
-#include <string.h>
 #include "language_runtime_api.h"
+#include "server.h"
 #include "mock_runtime.h"
 
 int main(int argc, char **argv) {
+	language_runtime *api = mock_getRuntime();
+	int ret = start_server(atol(argv[1]), api);
+	mock_freeRuntime(api);
+	return ret;
+}
+
+
+
+int test_main(int argc, char **argv) {
 	srand((unsigned int)time(NULL));
 
 	language_runtime *api = mock_getRuntime();
@@ -27,7 +35,7 @@ int main(int argc, char **argv) {
 
 		choice = rand()%numTransitions;
 		api->mFireOneTransition(sourceConfiguration, transitions[choice], &numTargetConfigurations, &targetConfigurations);
-		
+
 		free(sourceConfiguration);
 
 		for (int i=0; i<numTransitions; i++) {
