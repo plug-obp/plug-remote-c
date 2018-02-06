@@ -4,3 +4,7 @@ out/
 **/*.o
 mock_runner
 plug_server
+/bin/
+.classpath
+.settings
+.project
