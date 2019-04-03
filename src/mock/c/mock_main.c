@@ -1,6 +1,7 @@
 #include "language_runtime_api.h"
 #include "server.h"
 #include "mock_runtime.h"
+#include <string.h>
 
 int main(int argc, char **argv) {
 	language_runtime *api = mock_getRuntime();
