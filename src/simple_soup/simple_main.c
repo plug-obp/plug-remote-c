@@ -2,6 +2,7 @@
 #include "ss_interpreter.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 
 int main(int argc, char**argv) {
     ss_soup *soup = ss_make_soup();
@@ -17,7 +18,8 @@ int main(int argc, char**argv) {
     ss_state *state = initial_states[0];
     char *fireables = (char *)malloc(soup->behaviors_size * sizeof(char));
     
-    while (1) {
+    int steps = 10;
+    while (steps > 0) {
         print_state(state);
 
         ss_get_fireable_transitions(soup, state, fireables);
@@ -28,9 +30,15 @@ int main(int argc, char**argv) {
                 ss_fire_transition(soup, state, i);
             }
         }
+        steps--;
     }
 
+    free(fireables);
+#ifdef SS_DYNAMIC
     ss_free_soup(soup);
+    
+    printf("freed dynamically allocated model\n");
+#endif
     return 0;
 }
 
