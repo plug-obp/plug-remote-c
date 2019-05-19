@@ -9,8 +9,8 @@ char g0_0(ss_state *source) {
     return source->counters[0] < MAX;
 }
 
-int a0_0(ss_state *source, ss_state *target) {
-    target->counters[0] = source->counters[0]+1;
+int a0_0(ss_state *source) {
+    source->counters[0]++;
     return 0;
 }
 
@@ -18,8 +18,8 @@ char g0_1(ss_state *source) {
     return source -> counters[0] >= MAX;
 }
 
-int a0_1(ss_state *source, ss_state *target) {
-    target->counters[0] = 0;
+int a0_1(ss_state *source) {
+    source->counters[0] = 0;
     return 0;
 }
 
@@ -31,7 +31,14 @@ ss_soup * ss_make_soup() {
     ss_state *initial = (ss_state*) malloc(sizeof(ss_state));
     initial->counters = (int *)malloc(1 * sizeof(int));
     
-    ss_soup *soup;
+    ss_soup *soup = NULL;
     ss_new_soup(&initial, 1, behaviors, 2, &soup);
+
+    free(behaviors);
     return soup;
+}
+
+#include <stdio.h>
+void print_state(ss_state *s) {
+    printf("[%d]\n", s->counters[0]);
 }

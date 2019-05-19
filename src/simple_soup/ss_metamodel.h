@@ -1,8 +1,11 @@
 #ifndef SS_METAMODEL_H
 #define SS_METAMODEL_H
 
-#include <ss_model.h>
+#include "ss_model.h"
 typedef struct ss_state_s ss_state;
+
+void print_state(ss_state *s);
+
 typedef struct ss_behavior_s ss_behavior;
 
 struct ss_soup_s {
@@ -17,7 +20,7 @@ int ss_new_soup(ss_state **in_initial, int initial_count, ss_behavior **in_behav
 void ss_free_soup(ss_soup *io_soup);
 
 typedef char (*ss_guard_f)(ss_state *source);
-typedef int (*ss_action_f)(ss_state *source, ss_state *target);
+typedef int (*ss_action_f)(ss_state *source);
 
 struct ss_behavior_s {
     ss_soup *soup;
