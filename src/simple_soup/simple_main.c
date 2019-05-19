@@ -24,10 +24,11 @@ int main(int argc, char**argv) {
 
         ss_get_fireable_transitions(soup, state, fireables);
 
-        //fire the first enabled transition
+        //fire the first enabled transition, and break
         for (int i=0; i<soup->behaviors_size; i++) {
             if (fireables[i]) {
                 ss_fire_transition(soup, state, i);
+                break;
             }
         }
         steps--;
