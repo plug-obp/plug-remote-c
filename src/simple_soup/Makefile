@@ -1,4 +1,5 @@
 
+#MODEL=models/one_counter
 MODEL=models/one_counter_static
 
 all: simple_main.o metamodel.o model.o interpreter.o 
