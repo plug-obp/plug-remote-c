@@ -1,20 +1,13 @@
 #include "ss_metamodel.h"
 #include <stdlib.h>
 
-int ss_new_soup(ss_state **in_initial, int initial_count, ss_behavior **in_behaviors, int behavior_count, ss_soup **out_model) {
+int ss_new_soup(ss_state *in_initial, ss_behavior **in_behaviors, int behavior_count, ss_soup **out_model) {
     ss_soup *model = (ss_soup *)malloc(sizeof(ss_soup));
     if (model == NULL) {
         return 1;
     }
 
-    model->initial_size = initial_count;
-    model->initial_states = (ss_state **)malloc(initial_count * sizeof(ss_state *));
-    if (model->initial_states == NULL) {
-        return 1;
-    }
-    for (int i = 0; i<initial_count; i++) {
-        model->initial_states[i] = in_initial[i];
-    }
+    model->initial_state = in_initial;
 
     model->behaviors_size = behavior_count;
     model->behaviors = (ss_behavior **)malloc(behavior_count * sizeof(ss_behavior *));
@@ -29,10 +22,7 @@ int ss_new_soup(ss_state **in_initial, int initial_count, ss_behavior **in_behav
     return 0;
 }
 void ss_free_soup(ss_soup *io_soup) {
-    for (int i=0; i<io_soup->initial_size; i++) {
-        free(io_soup->initial_states[i]);
-    }
-    free(io_soup->initial_states);
+    free(io_soup->initial_state);
     for (int i=0; i<io_soup->behaviors_size; i++) {
         free(io_soup->behaviors[i]);
     }

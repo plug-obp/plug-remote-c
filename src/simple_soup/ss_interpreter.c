@@ -1,23 +1,23 @@
 #include "ss_interpreter.h"
 
 #include <stdlib.h>
+#include <string.h>
 
-int ss_initial_configurations(ss_soup *in_soup, int *out_initial_count, ss_state ***out_initial) {
-    *out_initial = in_soup->initial_states;
-    *out_initial_count = in_soup->initial_size;
+int ss_get_initial_configuration(ss_runtime_state *io_rstate) {
+    memcpy(io_rstate->m_state, io_rstate->m_soup->initial_state, sizeof(ss_state));
     return 0;
 }
-int ss_get_fireable_transitions(ss_soup *in_soup, ss_state *in_current, char *io_fireables) {
-    for (int i = 0; i<in_soup->behaviors_size; i++) {
-        if (in_soup->behaviors[i]->m_guard(in_current)) {
-            io_fireables[i] = 1;
-        } else {
-            io_fireables[i] = 0;
+int ss_get_fireable_transitions(ss_runtime_state *io_rstate) {
+    ss_soup *the_soup = io_rstate->m_soup;
+    io_rstate->m_fireable_size = 0;
+    for (int i = 0; i<the_soup->behaviors_size; i++) {
+        if (the_soup->behaviors[i]->m_guard(io_rstate->m_state)) {
+            io_rstate->m_fireable_set[io_rstate->m_fireable_size++] = i;
         }
     }
     return 0;
 }
-int ss_fire_transition(ss_soup *in_soup, ss_state *io_state, int behavior_id) {
-    in_soup->behaviors[behavior_id]->m_action(io_state);
+int ss_fire_transition(ss_runtime_state *io_rstate, int behavior_id) {
+    io_rstate->m_soup->behaviors[behavior_id]->m_action(io_rstate->m_state);
     return 0;
 }

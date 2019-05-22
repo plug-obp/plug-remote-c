@@ -1,10 +1,13 @@
 
 #MODEL=models/one_counter
-MODEL=models/one_counter_static
-#MODEL=models/two_counters
+#MODEL=models/one_counter_static
+MODEL=models/two_counters
 
 all: simple_main.o metamodel.o model.o interpreter.o 
 	gcc -g *.o -o simple_main
+
+ss_language_module.o: ss_language_module.c
+	gcc -g -c ss_language_module.c -I../language_module -I${MODEL} -o ss_language_module.o
 
 run: clean all
 	./simple_main

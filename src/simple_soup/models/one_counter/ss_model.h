@@ -3,7 +3,7 @@
 
 #define SS_DYNAMIC
 struct ss_state_s {
-    int *counters;
+    int counters[1];
 };
 
 #endif //SS_MODEL_H

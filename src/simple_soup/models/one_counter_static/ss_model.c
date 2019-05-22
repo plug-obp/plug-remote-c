@@ -25,13 +25,9 @@ int a0_1(ss_state *source) {
 }
 
 //static model instantiation
-int counter[1] = {0};
-
 ss_state state0 = {
-    .counters = counter
+    .counters = {0}
 };
-
-ss_state *states[1] = { &state0 };
 
 ss_behavior beh0 = {
     .soup = 0,
@@ -48,8 +44,7 @@ ss_behavior beh1 = {
 ss_behavior *behaviors[2] = {&beh0, &beh1};
 
 ss_soup soup = {
-    .initial_states = states,
-    .initial_size = 1,
+    .initial_state = &state0,
     .behaviors = behaviors,
     .behaviors_size = 2
 };

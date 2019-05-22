@@ -49,11 +49,11 @@ ss_soup * ss_make_soup() {
     ss_new_behavior(gB_1, aB_1, &behaviors[3]);
 
     ss_state *initial = (ss_state*) malloc(sizeof(ss_state));
-    initial->a = 0;
+    initial->a = 1;
     initial->b = 0;
     
     ss_soup *soup = NULL;
-    ss_new_soup(&initial, 1, behaviors, 4, &soup);
+    ss_new_soup(initial, behaviors, 4, &soup);
 
     free(behaviors);
     return soup;
