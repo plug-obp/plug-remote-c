@@ -1,7 +1,6 @@
 #include "stddef.h"
-#include "gve_adaptor.h"
+#include "language_module/gve_adaptor.h"
 #include "driver.h"
-#include "ss_language_module.h"
 
 //dans le main
 int status_function(status_t in_status, void *opaque) {
@@ -28,6 +27,5 @@ int main() {
     run_analysis(&drv);
 
     //do not return, we do not have an OS to return to
-    while (1) {}
     return 0;
 }

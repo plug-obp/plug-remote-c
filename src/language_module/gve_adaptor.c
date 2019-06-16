@@ -1,5 +1,7 @@
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "buffer/buffer.h"
 #include "language_module.h"
 #include "gve_adaptor.h"
@@ -24,7 +26,7 @@ void iterator_reset(iterator_t *iterator) {
 
     iterator_t *current = iterator->child_iterator;
     while (current != NULL) {
-        reset_iterator(current);
+        iterator_reset(current);
         current = current->child_iterator;
     }
 }
@@ -102,13 +104,15 @@ int gve_next_initial(gve_context_t *io_context, char **out_target, int *io_targe
     }
 
     if (*io_target_size != 0 && *io_target_size < target_size) {
-        printf("initial_handler: io_target_size < target_size");
+        printf("initial_handler: io_target_size < target_size\n");
         return 1; //the language returned a target bigger than the max accepted
     }
     *io_target_size = target_size;
     *out_target = target;
     return 0;
 }
+
+int next_target(obp2_language_runtime *runtime, iterator_t **io_iterator, void *source, void *fireable, char **out_target, int *io_target_size, char *out_has_next);
 
 int gve_next_target(gve_context_t *io_context, char *in_source, int in_source_size, char **out_target, int *io_target_size, char *out_has_next) {
     iterator_t *iterator = io_context->m_next_iterator;
@@ -150,10 +154,10 @@ int gve_next_target(gve_context_t *io_context, char *in_source, int in_source_si
         return 0;
     }
 
-    char *has_next = 0;
+    char has_next = 0;
     do {
         int result = 0;
-        if (result = next_target(runtime, &iterator->child_iterator, source, iterator->table[iterator->index], out_target, io_target_size, &has_next) != 0) {
+        if ((result = next_target(runtime, &iterator->child_iterator, source, iterator->table[iterator->index], out_target, io_target_size, &has_next)) != 0) {
             return result;
         }
         if (!has_next) {
@@ -230,7 +234,7 @@ int next_target(obp2_language_runtime *runtime, iterator_t **io_iterator, void *
     }
 
     if (*io_target_size != 0 && *io_target_size < target_size) {
-        printf("next_target: io_target_size < target_size");
+        printf("next_target: io_target_size < target_size\n");
         return 1; //the language returned a target bigger than the max accepted
     }
     *io_target_size = target_size;

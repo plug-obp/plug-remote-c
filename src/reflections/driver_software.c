@@ -32,15 +32,15 @@ int bfs(gve_context_t *io_context) {
         do {
             gve_next_target(
                 io_context,
-                current->data, &current->size,
-                target, &target_size,
+                current->data, current->size,
+                &target, &target_size,
                 &has_next);
             
             if (target == 0) continue; //no target was set
 
             buffer_t *target_buffer = buffer_create(target, target_size);
-            if (!set_add(closed, target_buffer)) {
-                add(open, target_buffer);
+            if (!lht_add(closed, target_buffer)) {
+                open_add(open, target_buffer);
             }
         } while (has_next);
     }
@@ -48,7 +48,7 @@ int bfs(gve_context_t *io_context) {
 }
 
 int run_analysis(driver_t *in_driver_params) {
-    return bfs(&in_driver_params->m_gve_context);
+    return bfs(in_driver_params->m_gve_context);
 }
 
 

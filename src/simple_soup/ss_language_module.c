@@ -9,7 +9,9 @@ int ss_initial_configurations(void *opaque, int* outNumConfigurations, void*** o
     ss_runtime_state *the_rstate = (ss_runtime_state *)opaque;
     int result = ss_get_initial_configuration(the_rstate);
 
-    *outConfigurations = (void **)&the_rstate->m_state;
+    *outConfigurations = malloc(sizeof(void *));
+    (*outConfigurations)[0] = malloc(sizeof(ss_state));
+    memcpy((*outConfigurations)[0],the_rstate->m_state, sizeof(ss_state));
     *outNumConfigurations = 1;
 
     return result;
@@ -20,7 +22,8 @@ int ss_fireable_transitions(void *opaque, void * inConfiguration, int* outNumTra
     memcpy(the_rstate->m_state, inConfiguration, sizeof(ss_state));
     int result = ss_get_fireable_transitions(the_rstate);
  
-    *outTransitions = (void **)the_rstate->m_fireable_set;
+    *outTransitions = malloc(the_rstate->m_fireable_size * sizeof(int *));
+    memcpy(*outTransitions, the_rstate->m_fireable_set, the_rstate->m_fireable_size * sizeof(int *));
     *outNumTransitions = the_rstate->m_fireable_size;
     return 0;
 }
@@ -30,8 +33,10 @@ int ss_fire_one_transition(void *opaque, void *inConfiguration, void *inTransiti
     memcpy(the_rstate->m_state, inConfiguration, sizeof(ss_state));
     int result = ss_fire_transition(the_rstate, (int)inTransition);
 
+    *outConfigurations = malloc(sizeof(void *));
+    (*outConfigurations)[0] = malloc(sizeof(ss_state));
+    memcpy((*outConfigurations)[0], the_rstate->m_state, sizeof(ss_state));
     *outNumConfigurations = 1;
-    *outConfigurations = (void **)&the_rstate->m_state;
     *outPayload = 0;
     return 0;
 }

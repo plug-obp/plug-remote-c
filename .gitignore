@@ -11,3 +11,5 @@ plug_server
 *.iml
 **/simple_main
 **/*.exe
+.vscode/settings.json
+src/reflections/gve_main

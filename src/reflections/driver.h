@@ -1,7 +1,7 @@
 #ifndef GVE_DRIVER
 #define GVE_DRIVER
 
-#include "gve_adaptor.h"
+#include "language_module/gve_adaptor.h"
 
 struct status_s {
     char is_done;
@@ -11,7 +11,7 @@ typedef struct status_s status_t;
 typedef int (*status_handler_t)(status_t in_status, void *opaque);
 
 struct driver_s {
-    gve_context_t * m_gve_context;
+    gve_context_t *m_gve_context;
     void *m_opaque;
     status_handler_t m_status;
 };
