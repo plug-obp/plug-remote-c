@@ -56,7 +56,7 @@ int gve_next_initial(gve_context_t *io_context, char **out_target, int *io_targe
     if (iterator == NULL) {
         int numInitial = 0;
         void **configurations = NULL;
-        runtime->language_module.transition_relation.m_initial_configurations(runtime->m_runtime_data, &numInitial, &configurations);
+        runtime->m_language_module.transition_relation.m_initial_configurations(runtime->m_runtime_data, &numInitial, &configurations);
 
         if (configurations == NULL || numInitial == 0) {
             *out_target = NULL;
@@ -84,7 +84,7 @@ int gve_next_initial(gve_context_t *io_context, char **out_target, int *io_targe
 
     int target_size = 0;
     char *target = 0;
-    runtime->language_module.marshaller
+    runtime->m_language_module.marshaller
         .m_serialize_configuration(
             runtime->m_runtime_data, 
             iterator->table[iterator->index],
@@ -115,12 +115,12 @@ int gve_next_target(gve_context_t *io_context, char *in_source, int in_source_si
     obp2_language_runtime *runtime = io_context->m_runtime;
 
     void *source = NULL;
-    runtime->language_module.marshaller.m_deserialize_configuration(runtime->m_runtime_data, in_source_size, in_source, &source);
+    runtime->m_language_module.marshaller.m_deserialize_configuration(runtime->m_runtime_data, in_source_size, in_source, &source);
 
     if (iterator == NULL) {
         int numFireables = 0;
         void **fireables = NULL;
-        runtime->language_module.transition_relation
+        runtime->m_language_module.transition_relation
             .m_fireable_transitions(
                 runtime->m_runtime_data,
                 source,
@@ -184,7 +184,7 @@ int next_target(obp2_language_runtime *runtime, iterator_t **io_iterator, void *
         int numTargets = 0;
         void **targets = NULL;
         void *payload = NULL;
-        runtime->language_module.transition_relation
+        runtime->m_language_module.transition_relation
             .m_fire_one_transition(runtime->m_runtime_data, source, fireable, &numTargets, &targets, &payload);
 
         if (targets == NULL || numTargets == 0) {
@@ -213,7 +213,7 @@ int next_target(obp2_language_runtime *runtime, iterator_t **io_iterator, void *
 
     int target_size = 0;
     char *target = 0;
-    runtime->language_module.marshaller
+    runtime->m_language_module.marshaller
         .m_serialize_configuration(
             runtime->m_runtime_data, 
             iterator->table[iterator->index],

@@ -9,5 +9,5 @@ plug_server
 .settings
 .project
 *.iml
-src/simple_soup/simple_main
+**/simple_main
 **/*.exe

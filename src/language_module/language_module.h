@@ -14,7 +14,7 @@ typedef struct obp2_transition_relation_s obp2_transition_relation;
 
 typedef char bool;
 struct obp2_atom_evaluator_s {
-    obp2_language_module *module;
+    obp2_language_module *m_module;
 
     int (*m_register_atomic_propositions)(void *opaque, int inSize, char **inPropositions, int *outSize, int **outIndices);
     int (*m_atomic_proposition_valuations)(void *opaque, void *inConfiguration, int *outSize, bool **outValuations);
@@ -23,7 +23,7 @@ struct obp2_atom_evaluator_s {
 typedef struct obp2_atom_evaluator_s obp2_atom_evaluator;
 
 struct obp2_marshaller_s {
-    obp2_language_module *module;
+    obp2_language_module *m_module;
 
     int (*m_serialize_configuration)(void *opaque, void * inConfiguration, int* outSize, char **outData);
     int (*m_deserialize_configuration)(void *opaque, int inSize, char *inData, void **outConfiguration);
@@ -44,7 +44,7 @@ struct obp2_tree_item_s {
 };
 
 struct obp2_view_s {
-    obp2_language_module *module;
+    obp2_language_module *m_module;
 
     int (*m_configuration_view)(void *opaque, void *inConfiguration, obp2_tree_item *view);
     int (*m_fireable_view)(void *opaque, void *inFireable, obp2_tree_item *view);
@@ -62,8 +62,10 @@ typedef struct obp2_language_module_s obp2_language_module;
 
 struct obp2_language_runtime_s {
     void *m_runtime_data;
-    obp2_language_module language_module;
+    obp2_language_module m_language_module;
 };
 typedef struct obp2_language_runtime_s obp2_language_runtime;
+
+obp2_language_runtime *obp2_create_runtime();
 
 #endif /*LANGUAGE_MODULE_H*/

@@ -31,7 +31,7 @@ endif
 
 
 ss_language_module.$(EXT): $(SRC_ROOTFS)/ss_language_module.c
-	$(CROSS_COMPILER)-$(COMPILER) $(OPTIONS) -g -c $(SRC_ROOTFS)/ss_language_module.c -I$(SRC_ROOTFS)/language_module -I${MODEL} -o ss_language_module.$(EXT)
+	$(CROSS_COMPILER)-$(COMPILER) $(OPTIONS) -g -c $(SRC_ROOTFS)/ss_language_module.c -I../$(SRC_ROOTFS)/language_module -I${MODEL} -o ss_language_module.$(EXT)
 
 run: clean all
 	./simple_main
