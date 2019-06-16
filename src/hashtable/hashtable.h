@@ -1,21 +1,16 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
-typedef struct hashtable_s hashtable;
-typedef struct item_s item;
+#include "hashable/hashable.h"
 
-struct hashtable_s
-{
-    int capacity;
-    int size;
-    item* items;    
-};
+typedef struct hashtable_s hashtable_t;
 
-struct item_s
-{
-    void *data;
-    item *next;
-};
+hashtable_t* lht_new(int capacity, hashable_callbacks_t callbacks);
+int lht_free(hashtable_t *table);
+char lht_add(hashtable_t *table, void *element);
+int lht_size(hashtable_t *table);
+void lht_print(hashtable_t *table);
+
 
 
 

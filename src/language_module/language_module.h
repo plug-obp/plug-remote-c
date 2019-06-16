@@ -58,5 +58,12 @@ struct obp2_language_module_s {
     obp2_marshaller marshaller;
     obp2_view view;
 };
+typedef struct obp2_language_module_s obp2_language_module;
+
+struct obp2_language_runtime_s {
+    void *m_runtime_data;
+    obp2_language_module language_module;
+};
+typedef struct obp2_language_runtime_s obp2_language_runtime;
 
 #endif /*LANGUAGE_MODULE_H*/

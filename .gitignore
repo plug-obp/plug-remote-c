@@ -10,3 +10,4 @@ plug_server
 .project
 *.iml
 src/simple_soup/simple_main
+**/*.exe
