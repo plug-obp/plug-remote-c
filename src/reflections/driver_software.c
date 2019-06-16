@@ -4,8 +4,9 @@
 #include "open/open.h"
 #include "hashtable/hashtable.h"
 #include "driver.h"
+#include "language_module/gve_adaptor.h"
 
-int bfs(mc_automaton_t *in_automaton) {
+int bfs(gve_context_t *io_context) {
     open_t *open = open_create(5, buffer_print);
     hashtable_t *closed = lht_new(10, buffer_callbacks);
 
@@ -13,8 +14,8 @@ int bfs(mc_automaton_t *in_automaton) {
     int initial_size = sizeof(int);
     char has_next = 0;
     do {
-        in_automaton->m_initial_handler(
-            in_automaton->m_opaque, 
+        gve_next_initial(
+            io_context, 
             &initial, &initial_size, 
             &has_next);
         if (initial == 0) continue; //no initial was set
@@ -29,8 +30,8 @@ int bfs(mc_automaton_t *in_automaton) {
         char *target = 0;
         int target_size = sizeof(int);
         do {
-            in_automaton->m_next_handler(
-                in_automaton->m_opaque,
+            gve_next_target(
+                io_context,
                 current->data, &current->size,
                 target, &target_size,
                 &has_next);
@@ -47,7 +48,7 @@ int bfs(mc_automaton_t *in_automaton) {
 }
 
 int run_analysis(driver_t *in_driver_params) {
-    return bfs(&in_driver_params->m_automaton);
+    return bfs(&in_driver_params->m_gve_context);
 }
 
 

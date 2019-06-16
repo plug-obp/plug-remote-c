@@ -11,7 +11,7 @@ typedef struct status_s status_t;
 typedef int (*status_handler_t)(status_t in_status, void *opaque);
 
 struct driver_s {
-    mc_automaton_t m_automaton;
+    gve_context_t * m_gve_context;
     void *m_opaque;
     status_handler_t m_status;
 };

@@ -49,7 +49,7 @@ void gve_free_context(gve_context_t *context) {
     free(context);
 }
 
-int gve_initial_handler(gve_context_t *io_context, char **out_target, int *io_target_size, char *out_has_next) {
+int gve_next_initial(gve_context_t *io_context, char **out_target, int *io_target_size, char *out_has_next) {
     iterator_t *iterator = io_context->m_initial_iterator;
     obp2_language_runtime *runtime = io_context->m_runtime;
 
@@ -110,7 +110,7 @@ int gve_initial_handler(gve_context_t *io_context, char **out_target, int *io_ta
     return 0;
 }
 
-int gve_next_handler(gve_context_t *io_context, char *in_source, int in_source_size, char **out_target, int *io_target_size, char *out_has_next) {
+int gve_next_target(gve_context_t *io_context, char *in_source, int in_source_size, char **out_target, int *io_target_size, char *out_has_next) {
     iterator_t *iterator = io_context->m_next_iterator;
     obp2_language_runtime *runtime = io_context->m_runtime;
 
