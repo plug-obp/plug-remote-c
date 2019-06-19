@@ -22,8 +22,12 @@ int ss_fireable_transitions(void *opaque, void * inConfiguration, int* outNumTra
     memcpy(the_rstate->m_state, inConfiguration, sizeof(ss_state));
     int result = ss_get_fireable_transitions(the_rstate);
  
-    *outTransitions = malloc(the_rstate->m_fireable_size * sizeof(int *));
-    memcpy(*outTransitions, the_rstate->m_fireable_set, the_rstate->m_fireable_size * sizeof(int *));
+    int **transitions = malloc(the_rstate->m_fireable_size * sizeof(int*));
+    for (int i = 0; i < the_rstate->m_fireable_size; i++) {
+        transitions[i] = malloc(sizeof(int));
+        *(transitions[i]) = the_rstate->m_fireable_set[i];
+    }
+    *outTransitions = ((void **) transitions);
     *outNumTransitions = the_rstate->m_fireable_size;
     return 0;
 }
@@ -31,7 +35,7 @@ int ss_fire_one_transition(void *opaque, void *inConfiguration, void *inTransiti
     ss_runtime_state *the_rstate = (ss_runtime_state *)opaque;
     
     memcpy(the_rstate->m_state, inConfiguration, sizeof(ss_state));
-    int result = ss_fire_transition(the_rstate, (int)inTransition);
+    int result = ss_fire_transition(the_rstate, *(int *)inTransition);
 
     *outConfigurations = malloc(sizeof(void *));
     (*outConfigurations)[0] = malloc(sizeof(ss_state));
@@ -52,7 +56,7 @@ int ss_serialize_configuration(void *opaque, void * inConfiguration, int* outSiz
     return 0;
 }
 int ss_deserialize_configuration(void *opaque, int inSize, char *inData, void **outConfiguration){
-
+    *outConfiguration = malloc(inSize);
     memcpy(*outConfiguration, inData, inSize);
     return 0;
 }
@@ -64,7 +68,7 @@ int ss_serialize_transition(void *opaque, void * inTransition, int* outSize, cha
     return 0;
 }
 int ss_deserialize_transition(void *opaque, int inSize, char *inData, void ** outTransition){
-
+    *outTransition = malloc(inSize);
     memcpy(*outTransition, inData, inSize);
     return 0;
 }
@@ -110,7 +114,7 @@ obp2_language_runtime* obp2_create_runtime() {
     the_runtime_state.m_soup  = ss_make_soup();
     the_runtime_state.m_state = &state;
     the_runtime_state.m_fireable_size = the_runtime_state.m_soup->behaviors_size;
-    the_runtime_state.m_fireable_set = alloca(the_runtime_state.m_fireable_size * sizeof(int));
+    the_runtime_state.m_fireable_set = malloc(the_runtime_state.m_fireable_size * sizeof(int));
 
     return &ss_language_runtime;
 }

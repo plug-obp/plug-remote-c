@@ -1,7 +1,9 @@
 #ifndef HASHABLE_H
 #define HASHABLE_H
 
-typedef int (*HashcodeCb_t)(void *element);
+#include <stdint.h>
+
+typedef uint64_t (*HashcodeCb_t)(void *element);
 typedef int (*EqualityCb_t)(void *a, void *b);
 typedef void (*FreeCb_t)(void *element);
 typedef void (*PrintCb_t)(void *element);

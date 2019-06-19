@@ -21,7 +21,9 @@ int main() {
     driver_t drv = {
             .m_gve_context = gve_create_context(runtime),
             .m_opaque = &is_done,
-            .m_status =  status_function
+            .m_status =  status_function,
+            .m_open_capacity = 1000,
+            .m_closed_capacity = 1000 
     };
 
     run_analysis(&drv);

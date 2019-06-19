@@ -142,7 +142,7 @@ int gve_next_target(gve_context_t *io_context, char *in_source, int in_source_si
         iterator->table_size = numFireables;
         iterator->index = 0;
         iterator->child_iterator = NULL;
-        iterator->free_elements = 0;
+        iterator->free_elements = 1;
 
         io_context->m_next_iterator = iterator;
     }
@@ -229,6 +229,7 @@ int next_target(obp2_language_runtime *runtime, iterator_t **io_iterator, void *
     if (iterator->index >= iterator->table_size) {
         iterator_reset(iterator);
         free(iterator);
+        *io_iterator = NULL;
     } else {
         *out_has_next = 1;
     }

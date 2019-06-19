@@ -20,7 +20,7 @@ buffer_t * buffer_create(char *in_data, int size) {
     return buf;
 }
 
-int buffer_hashcode(void *element) {
+uint64_t buffer_hashcode(void *element) {
     buffer_t *buffer = (buffer_t *) element;
     return fasthash64(buffer->data, buffer->size, 12345);
 }

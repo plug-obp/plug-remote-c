@@ -1,6 +1,7 @@
 #ifndef BUFFER
 #define BUFFER
 
+#include <stdint.h>
 #include "hashable/hashable.h"
 
 struct buffer_s {
@@ -10,7 +11,7 @@ struct buffer_s {
 typedef struct buffer_s buffer_t;
 
 buffer_t * buffer_create(char *in_data, int size);
-int buffer_hashcode(void *element);
+uint64_t buffer_hashcode(void *element);
 int buffer_equals(void *a, void *b);
 void buffer_free(void *element);
 void buffer_print(void *element);

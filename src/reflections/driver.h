@@ -14,6 +14,8 @@ struct driver_s {
     gve_context_t *m_gve_context;
     void *m_opaque;
     status_handler_t m_status;
+    int m_open_capacity;
+    int m_closed_capacity;
 };
 typedef struct  driver_s driver_t;
 

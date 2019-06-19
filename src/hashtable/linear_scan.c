@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "hashtable.h"
@@ -35,14 +36,18 @@ int lht_free(hashtable_t *table) {
     return 0;
 }
 char lht_add(hashtable_t *table, void *element) {
-    int hash = table->m_callbacks.m_hash(element);
-    int idx = hash % table->m_capacity;
+    uint64_t hash = table->m_callbacks.m_hash(element);
+    uint64_t idx = hash % table->m_capacity;
     if (table->m_items[idx] == 0) { //empty slot found add it
         table->m_items[idx] = element;
         table->m_size++;
         return 0;
     }
-    int start = idx;
+    if (table->m_callbacks.m_equals(table->m_items[idx], element)) {
+        //found
+        return 1;
+    }
+    uint64_t start = idx;
     do {
         idx = (idx + 1) % table->m_capacity;
     } while (

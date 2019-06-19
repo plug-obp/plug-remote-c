@@ -13,3 +13,5 @@ plug_server
 **/*.exe
 .vscode/settings.json
 src/reflections/gve_main
+**/*.xcuserstate
+**/*.xcworkspacedata

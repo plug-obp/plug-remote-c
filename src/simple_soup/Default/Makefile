@@ -11,9 +11,10 @@ else
 endif
 
 
-#MODEL=models/one_counter
-#MODEL=models/one_counter_static
+
 SRC_ROOTFS=..
+#MODEL=$(SRC_ROOTFS)/models/one_counter
+#MODEL=$(SRC_ROOTFS)/models/one_counter_static
 MODEL=$(SRC_ROOTFS)/models/two_counters
 COMPILER=gcc
 
