@@ -45,6 +45,7 @@ char lht_add(hashtable_t *table, void *element) {
     }
     if (table->m_callbacks.m_equals(table->m_items[idx], element)) {
         //found
+    	table->m_callbacks.m_free(element); // this element is useless
         return 1;
     }
     uint64_t start = idx;
@@ -56,6 +57,7 @@ char lht_add(hashtable_t *table, void *element) {
         &&  idx != start);
     
     if (idx == start) {
+    	table->m_callbacks.m_free(element); // this element is useless
         return 2; // full
     }
     if (table->m_items[idx] == 0) { //empty slot found add it
@@ -64,6 +66,7 @@ char lht_add(hashtable_t *table, void *element) {
         return 0;
     }
     //found
+    table->m_callbacks.m_free(element); // this element is useless
     return 1;
 }
 

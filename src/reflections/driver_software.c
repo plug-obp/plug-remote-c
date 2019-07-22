@@ -51,6 +51,8 @@ int bfs(gve_context_t *io_context, int open_cap, int closed_cap) {
     }
     printf("number of configurations %d\n", lht_size(closed));
     //lht_print(closed);
+    lht_free(closed);
+    open_free(open);
     return 0;
 }
 

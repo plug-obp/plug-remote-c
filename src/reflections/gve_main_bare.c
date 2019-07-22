@@ -17,9 +17,10 @@ int main() {
     int is_done = 0;
     
     obp2_language_runtime *runtime = obp2_create_runtime();
+    gve_context_t * gve_context = gve_create_context(runtime);
 
     driver_t drv = {
-            .m_gve_context = gve_create_context(runtime),
+            .m_gve_context = gve_context,
             .m_opaque = &is_done,
             .m_status =  status_function,
             .m_open_capacity = 1000,
@@ -27,6 +28,8 @@ int main() {
     };
 
     run_analysis(&drv);
+
+    gve_free_context(gve_context);
 
     //do not return, we do not have an OS to return to
     return 0;
