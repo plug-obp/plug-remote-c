@@ -1,7 +1,7 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
-#include "hashable/hashable.h"
+#include "hashable.h"
 
 typedef struct hashtable_s hashtable_t;
 

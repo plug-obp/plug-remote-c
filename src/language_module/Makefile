@@ -8,24 +8,23 @@ __check_defined = \
       $(error Undefined $1$(if $2, ($2))))
 
 
-$(call check_defined, BUILD_LOC, folder to put binary files)
+$(call check_defined, GVE_ADAPTER_BIN_DIR, folder to put binary files)
+$(call check_defined, GVE_ADAPTER_LIB_DIR, library location)
 $(call check_defined, CC, Compiler to use)
-$(call check_defined, HARD_SPECIFIC_OPTIONS, Hardware-specific options to use)
-$(call check_defined, BUILD_LOC, *.o files location)
-$(call check_defined, BUILD_LIB_DIR, library location)
-
-OPTIONS= $(COMMON_OPTIONS) $(HARD_SPECIFIC_OPTIONS)
+$(call check_defined, CC_OPTIONS, compilation options)
 
 
+all : $(GVE_ADAPTER_LIB_DIR)/libgve_adaptor.a $(GVE_ADAPTER_BIN_DIR)/gve_adaptor.o 
 
+$(GVE_ADAPTER_LIB_DIR)/libgve_adaptor.a : $(GVE_ADAPTER_BIN_DIR)/gve_adaptor.o 
+	ar -r $(GVE_ADAPTER_LIB_DIR)/libgve_adaptor.a $(GVE_ADAPTER_BIN_DIR)/gve_adaptor.o
 
-
-
-
-
-
-gve_adapter.a : gve_adaptor.o 
-	ar -r $(BUILD_LIB_DIR)/gve_adapter.a $(BUILD_LOC)/gve_adaptor.o
-
-gve_adaptor.o: gve_adaptor.c
-	$(CC) $(OPTIONS) -c gve_adaptor.c -o $(BUILD_LOC)/gve_adaptor.o
+$(GVE_ADAPTER_BIN_DIR)/gve_adaptor.o : gve_adaptor.c
+	$(CC) $(CC_OPTIONS) -c gve_adaptor.c -o $(GVE_ADAPTER_BIN_DIR)/gve_adaptor.o
+	
+	
+	
+clean : 	
+	rm $(GVE_ADAPTER_BIN_DIR)/*
+	rm $(GVE_ADAPTER_LIB_DIR)/*
+	

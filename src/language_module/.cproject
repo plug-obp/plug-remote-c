@@ -3,38 +3,44 @@
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="xilinx.gnu.armv7.toolchain.1071335997">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="xilinx.gnu.armv7.toolchain.1071335997" moduleId="org.eclipse.cdt.core.settings" name="Default">
-				<externalSettings/>
+				<externalSettings>
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/gve_adapter"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/gve_adapter/Default"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="gve_adapter" srcPrefixMapping="" srcRootPath=""/>
+					</externalSetting>
+				</externalSettings>
 				<extensions>
-					<extension id="com.xilinx.sdk.managedbuilder.XELF.arm.a53.x32" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildProperties="" description="" id="xilinx.gnu.armv7.toolchain.1071335997" name="Default" parent="org.eclipse.cdt.build.core.emptycfg">
+				<configuration artifactExtension="a" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" description="" id="xilinx.gnu.armv7.toolchain.1071335997" name="Default" parent="org.eclipse.cdt.build.core.emptycfg">
 					<folderInfo id="xilinx.gnu.armv7.toolchain.1071335997.394695119" name="/" resourcePath="">
-						<toolChain id="xilinx.gnu.armv7.toolchain.1349455999" name="Xilinx ARM v7 GNU Toolchain" superClass="xilinx.gnu.armv7.toolchain">
-							<targetPlatform binaryParser="com.xilinx.sdk.managedbuilder.XELF.arm.a53.x32" id="xilinx.armv7.target.gnu.base.812188161" isAbstract="false" name="Debug Platform" superClass="xilinx.armv7.target.gnu.base"/>
-							<builder autoBuildTarget="gve_adapter.a " enableAutoBuild="true" enabledIncrementalBuild="false" id="xilinx.gnu.armv7.toolchain.builder.162512840" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="GNU make" superClass="xilinx.gnu.armv7.toolchain.builder"/>
-							<tool id="xilinx.gnu.armv7.c.toolchain.assembler.671892953" name="ARM v7 gcc assembler" superClass="xilinx.gnu.armv7.c.toolchain.assembler">
-								<inputType id="xilinx.gnu.assembler.input.1328132482" superClass="xilinx.gnu.assembler.input"/>
+						<toolChain id="cdt.managedbuild.toolchain.gnu.base.953506146" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.base">
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.base.440455445" name="Debug Platform" osList="linux,hpux,aix,qnx" superClass="cdt.managedbuild.target.gnu.platform.base"/>
+							<builder autoBuildTarget="all" buildPath="${workspace_loc:/gve_adapter}" cleanBuildTarget="clean" enableAutoBuild="true" enableCleanBuild="true" enabledIncrementalBuild="true" id="cdt.managedbuild.target.gnu.builder.base.1791951678" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" parallelBuildOn="false" superClass="cdt.managedbuild.target.gnu.builder.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1134044121" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.520410923" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.936826467" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
+								<option id="gnu.c.compiler.option.dialect.std.1829942806" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.include.paths.581439519" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="/home/fourniem/Playground/GVE/Software/plug-remote-c/src/language_module"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.989699623" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
-							<tool id="xilinx.gnu.armv7.c.toolchain.compiler.146268325" name="ARM v7 gcc compiler" superClass="xilinx.gnu.armv7.c.toolchain.compiler">
-								<inputType id="xilinx.gnu.armv7.c.compiler.input.1482390043" name="C source files" superClass="xilinx.gnu.armv7.c.compiler.input"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.2034162211" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1396197008" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.base.1312412167" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
+								<option id="gnu.both.asm.option.include.paths.1170055044" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="/home/fourniem/Playground/GVE/Software/plug-remote-c/src/language_module"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1277954693" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
-							<tool id="xilinx.gnu.armv7.cxx.toolchain.compiler.2029768314" name="ARM v7 g++ compiler" superClass="xilinx.gnu.armv7.cxx.toolchain.compiler"/>
-							<tool id="xilinx.gnu.armv7.toolchain.archiver.129051482" name="ARM v7 archiver" superClass="xilinx.gnu.armv7.toolchain.archiver"/>
-							<tool id="xilinx.gnu.armv7.c.toolchain.linker.1162739055" name="ARM v7 gcc linker" superClass="xilinx.gnu.armv7.c.toolchain.linker">
-								<inputType id="xilinx.gnu.linker.input.1418772684" superClass="xilinx.gnu.linker.input">
-									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
-									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
-								</inputType>
-								<inputType id="xilinx.gnu.linker.input.lscript.1431093610" name="Linker Script" superClass="xilinx.gnu.linker.input.lscript"/>
-							</tool>
-							<tool id="xilinx.gnu.armv7.cxx.toolchain.linker.2075959804" name="ARM v7 g++ linker" superClass="xilinx.gnu.armv7.cxx.toolchain.linker"/>
 						</toolChain>
 					</folderInfo>
 				</configuration>

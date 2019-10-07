@@ -20,6 +20,7 @@ $(call check_defined, LANGUAGE_MODULE_LOC, location of the language_module.h fil
 #COMMON_OPTIONS= -Wall -g -O0
 
 #OPTIONS = $(COMMON_OPTIONS) $(HARD_SPECIFIC_OPTIONS)
+export CC_OPTIONS
 
 SRC_ROOT = $(shell pwd)
 export SRC_ROOT 

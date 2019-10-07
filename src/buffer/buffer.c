@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-#include "hash/fast-hash/fasthash.h"
+#include "fasthash.h"
 #include "buffer.h"
 
 hashable_callbacks_t buffer_callbacks = {

@@ -3,8 +3,8 @@
 
 #define SS_DYNAMIC
 struct ss_state_s {
-    int a;
-    int b;
+    short a;
+    short b;
 };
 
 #endif //SS_MODEL_H

@@ -2,7 +2,7 @@
 #define BUFFER
 
 #include <stdint.h>
-#include "hashable/hashable.h"
+#include "hashable.h"
 
 struct buffer_s {
     char *data;
