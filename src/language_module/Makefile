@@ -11,13 +11,14 @@ __check_defined = \
 $(call check_defined, GVE_ADAPTER_BIN_DIR, folder to put binary files)
 $(call check_defined, GVE_ADAPTER_LIB_DIR, library location)
 $(call check_defined, CC, Compiler to use)
+$(call check_defined, AR, Archiver to use)
 $(call check_defined, CC_OPTIONS, compilation options)
 
 
 all : $(GVE_ADAPTER_LIB_DIR)/libgve_adaptor.a $(GVE_ADAPTER_BIN_DIR)/gve_adaptor.o 
 
 $(GVE_ADAPTER_LIB_DIR)/libgve_adaptor.a : $(GVE_ADAPTER_BIN_DIR)/gve_adaptor.o 
-	ar -r $(GVE_ADAPTER_LIB_DIR)/libgve_adaptor.a $(GVE_ADAPTER_BIN_DIR)/gve_adaptor.o
+	$(AR) -r $(GVE_ADAPTER_LIB_DIR)/libgve_adaptor.a $(GVE_ADAPTER_BIN_DIR)/gve_adaptor.o
 
 $(GVE_ADAPTER_BIN_DIR)/gve_adaptor.o : gve_adaptor.c
 	$(CC) $(CC_OPTIONS) -c gve_adaptor.c -o $(GVE_ADAPTER_BIN_DIR)/gve_adaptor.o
