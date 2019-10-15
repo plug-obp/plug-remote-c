@@ -1,5 +1,9 @@
 #include "ss_metamodel.h"
-#include <stdlib.h>
+#ifndef STDLIB_CUSTOM
+	#include <stdlib.h>
+#else
+	#include <stdlibCustom.h>
+#endif 
 
 int ss_new_soup(ss_state *in_initial, ss_behavior **in_behaviors, int behavior_count, ss_soup **out_model) {
     ss_soup *model = (ss_soup *)malloc(sizeof(ss_soup));

@@ -1,7 +1,13 @@
+#ifndef STDLIB_CUSTOM
 #include <stdlib.h>
+#else
+#include <stdlibCustom.h>
+#endif 
 #include <string.h>
 #include "fasthash.h"
 #include "buffer.h"
+
+
 
 hashable_callbacks_t buffer_callbacks = {
     .m_hash = buffer_hashcode,

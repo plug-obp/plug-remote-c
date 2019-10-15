@@ -22,14 +22,18 @@ $(call check_defined, LANGUAGE_MODULE_LOC, location of the language_module.h fil
 
 #OPTIONS = $(COMMON_OPTIONS) $(HARD_SPECIFIC_OPTIONS)
 export CC_OPTIONS
+export MODEL_DEPTH
 
 SRC_ROOT = $(shell pwd)
 export SRC_ROOT 
 
+INCL_PATH ?= 
+export INCL_PATH
+
 all : ss_interpreter.o ss_model.o ss_metamodel.o ss_language_module.o
 	$(AR) -r $(PLUG_MODEL_LIB_DIR)/libplug_model.a $(PLUG_MODEL_BIN_DIR)/*.o 
 ss_interpreter.o : 
-	$(CC) $(CC_OPTIONS) -I$(MODEL_PATH) -c ss_interpreter.c -o $(PLUG_MODEL_BIN_DIR)/ss_interpreter.o
+	$(CC) $(CC_OPTIONS) $(INCL_PATH) -I$(MODEL_PATH) -c ss_interpreter.c -o $(PLUG_MODEL_BIN_DIR)/ss_interpreter.o
 	
 	
 ss_model.o : 
@@ -37,10 +41,10 @@ ss_model.o :
 	
 	
 ss_metamodel.o : 
-	$(CC) $(CC_OPTIONS) -I$(MODEL_PATH) -c ss_metamodel.c -o $(PLUG_MODEL_BIN_DIR)/ss_metamodel.o
+	$(CC) $(CC_OPTIONS) $(INCL_PATH) -I$(MODEL_PATH) -c ss_metamodel.c -o $(PLUG_MODEL_BIN_DIR)/ss_metamodel.o
 	
 ss_language_module.o : 
-	$(CC) $(CC_OPTIONS) -I$(LANGUAGE_MODULE_LOC) -I$(MODEL_PATH) -c ss_language_module.c -o $(PLUG_MODEL_BIN_DIR)/ss_language_module.o
+	$(CC) $(CC_OPTIONS) $(INCL_PATH) -I$(LANGUAGE_MODULE_LOC) -I$(MODEL_PATH) -c ss_language_module.c -o $(PLUG_MODEL_BIN_DIR)/ss_language_module.o
 	
 	
 clean : 

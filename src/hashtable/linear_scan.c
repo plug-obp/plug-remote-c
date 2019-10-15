@@ -1,5 +1,10 @@
 #include <stdint.h>
-#include <stdlib.h>
+#ifndef STDLIB_CUSTOM
+	#include <stdlib.h>
+#else
+	#include <stdlibCustom.h>
+#endif 
+
 #include <stdio.h>
 #include "hashtable.h"
 

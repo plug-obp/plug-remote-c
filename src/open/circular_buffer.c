@@ -1,5 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
+#ifndef STDLIB_CUSTOM
+	#include <stdlib.h>
+#else
+	#include <stdlibCustom.h>
+#endif 
 #include "open.h"
 
 struct open_s {

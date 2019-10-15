@@ -1,8 +1,14 @@
 #include <stddef.h>
-#include <stdlib.h>
+
+#ifndef STDLIB_CUSTOM
+	#include <stdlib.h>
+#else
+	#include <stdlibCustom.h>
+#endif 
+
 #include "ss_language_module.h"
 #include "ss_interpreter.h"
-
+#include "setjmp.h"
 #include <string.h>
 
 int ss_initial_configurations(void *opaque, int* outNumConfigurations, void*** outConfigurations) {
@@ -33,7 +39,7 @@ int ss_fireable_transitions(void *opaque, void * inConfiguration, int* outNumTra
 }
 int ss_fire_one_transition(void *opaque, void *inConfiguration, void *inTransition, int* outNumConfigurations, void ***outConfigurations, void **outPayload) {
     ss_runtime_state *the_rstate = (ss_runtime_state *)opaque;
-    
+
     memcpy(the_rstate->m_state, inConfiguration, sizeof(ss_state));
     ss_fire_transition(the_rstate, *(int *)inTransition);
 

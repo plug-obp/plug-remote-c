@@ -3,8 +3,9 @@
 
 #include <stdlib.h>
 
-#define MAX 2
-
+#ifndef MAX
+    #define MAX 2
+#endif
 char gA_0(ss_state *source) {
     return source->a < MAX;
 }

@@ -6,9 +6,9 @@ define(`_forloop',
        `$4`'ifelse($1, `$3', ,
 			 `define(`$1', incr($1))_forloop(`$1', `$2', `$3', `$4')')')
 
-define(N,32)
+define(N,11)
 
-define(isFireable, `((bits != 0) ? ((bits[source->data % BITS_SIZE]>>($1) & 1) > 0) : 1)')  
+define(isFireable, `((TableBits != 0) ? ((TableBits[source->data % BITS_SIZE]>>($1) & 1) > 0) : 1)')  
 
 define(guard_true, `char gA_true_$1(ss_state *source) {
     return ((source->data>>$1) & 1) > 0 && isFireable($1);
@@ -56,6 +56,16 @@ divert
 #include "ss_model.h"
 
 #include <stdlib.h>
+
+#define BITS_SIZE 20
+// int32_t bits[] =  {
+    // 170, 377, 399, 394, 554, 
+    // 1004, 208, 350, 755, 96, 
+    // 305, 72, 699, 516, 675, 
+    // 716, 321, 491, 777, 601
+// };
+//uncomment the following for a full branching factor
+int32_t* TableBits = 0;
 
 forloop(i,0,eval(N-1),`process(i)')
 

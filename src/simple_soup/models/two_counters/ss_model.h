@@ -7,4 +7,5 @@ struct ss_state_s {
     short b;
 };
 
+
 #endif //SS_MODEL_H
