@@ -67,5 +67,6 @@ struct obp2_language_runtime_s {
 typedef struct obp2_language_runtime_s obp2_language_runtime;
 
 obp2_language_runtime *obp2_create_runtime();
+int obp2_free_runtime(obp2_language_runtime* runtime); 
 
 #endif /*LANGUAGE_MODULE_H*/
