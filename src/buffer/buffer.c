@@ -4,11 +4,8 @@
 #include <stdlibCustom.h>
 #endif 
 #include <string.h>
-#include "fasthash.h"
 #include "buffer.h"
-
-
-
+#include "stdio.h"
 hashable_callbacks_t buffer_callbacks = {
     .m_hash = buffer_hashcode,
     .m_equals = buffer_equals,
@@ -26,13 +23,8 @@ buffer_t * buffer_create(char *in_data, int size) {
     return buf;
 }
 
-uint64_t buffer_hashcode(void *element) {
-    buffer_t *buffer = (buffer_t *) element;
-    return fasthash64(buffer->data, buffer->size, 12345);
-}
-
 int buffer_equals(void *a, void *b) {
-    buffer_t *theA = (buffer_t *)a; 
+    buffer_t *theA = (buffer_t *)a;
     buffer_t *theB = (buffer_t *)b;
     if (theA->size != theB->size) {
         return 0;
@@ -55,3 +47,25 @@ void buffer_print(void *element) {
     }
     printf(", size: %d}", buffer->size);
 }
+
+
+#ifndef MURMUR3
+#include "fasthash.h"
+
+uint64_t buffer_hashcode(void *element) {
+    buffer_t *buffer = (buffer_t *) element;
+    return fasthash64(buffer->data, buffer->size, 12345);
+}
+
+#else
+#include "murmur3.h"
+#define uint8 char
+
+uint64_t buffer_hashcode(void* element) {
+    buffer_t *buffer = (buffer_t*) element;
+
+    return (uint64_t) murmur3_32((uint8*) buffer->data, buffer->size, 42); // Seed : Same as .vhd
+}
+
+
+#endif
