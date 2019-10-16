@@ -56,11 +56,11 @@ int gve_next_initial(gve_context_t *io_context, char **out_target, int *io_targe
     obp2_language_runtime *runtime = io_context->m_runtime;
 
     if (iterator == NULL) {
-        int numInitial = 0;
-        void **configurations = NULL;
-        runtime->m_language_module.transition_relation.m_initial_configurations(runtime->m_runtime_data, &numInitial, &configurations);
+        int numInitial = 1;     // already allocated memory space
+        void **targets = (void**) out_target; 
+        runtime->m_language_module.transition_relation.m_initial_configurations(runtime->m_runtime_data, &numInitial, &targets);
 
-        if (configurations == NULL || numInitial == 0) {
+        if (targets == NULL || numInitial == 0) {
             *out_target = NULL;
             *io_target_size = 0;
             *out_has_next = 0;
@@ -68,11 +68,14 @@ int gve_next_initial(gve_context_t *io_context, char **out_target, int *io_targe
         }
 
         iterator = malloc(sizeof(iterator_t));
-        iterator->table = configurations;
+        iterator->table = targets;
         iterator->table_size = numInitial;
         iterator->index = 0;
         iterator->child_iterator = NULL;
-        iterator->free_elements = 1;
+        iterator->free_elements = 0;
+        if (targets != (void*) out_target) {
+            free(*out_target);
+        } //else iterator->free_elements = 1;
 
         io_context->m_initial_iterator = iterator;
     }
@@ -185,8 +188,8 @@ int next_target(obp2_language_runtime *runtime, iterator_t **io_iterator, void *
     iterator_t *iterator = *io_iterator;
 
     if (iterator == NULL) {
-        int numTargets = 0;
-        void **targets = NULL;
+        int numTargets = 1;		// already allocated memory space
+        void **targets = (void**) out_target; 
         void *payload = NULL;
         runtime->m_language_module.transition_relation
             .m_fire_one_transition(runtime->m_runtime_data, source, fireable, &numTargets, &targets, &payload);
@@ -203,7 +206,10 @@ int next_target(obp2_language_runtime *runtime, iterator_t **io_iterator, void *
         iterator->table_size = numTargets;
         iterator->index = 0;
         iterator->child_iterator = NULL;
-        iterator->free_elements = 1;
+        iterator->free_elements = 0;
+        if (targets != (void*) out_target) {
+        	free(*out_target);
+        } //else iterator->free_elements = 1;
 
         *io_iterator = iterator;
     }
