@@ -54,16 +54,18 @@ int ss_fire_one_transition(void *opaque, void *inConfiguration, void *inTransiti
 int ss_serialize_configuration(void *opaque, void * inConfiguration, int* outSize, char **outData) {
     
     *outSize = sizeof(ss_state);
-    *outData = malloc(sizeof(ss_state));
-    if (*outData == NULL) {
-        return 1;
-    }
-    memcpy(*outData, inConfiguration, *outSize);
+    *outData = inConfiguration; 
+    // *outData = malloc(sizeof(ss_state));
+    // if (*outData == NULL) {
+    //     return 1;
+    // }
+    // memcpy(*outData, inConfiguration, *outSize);
     return 0;
 }
 int ss_deserialize_configuration(void *opaque, int inSize, char *inData, void **outConfiguration){
-    *outConfiguration = malloc(inSize);
-    memcpy(*outConfiguration, inData, inSize);
+    // *outConfiguration = malloc(inSize);
+    // memcpy(*outConfiguration, inData, inSize);
+    *outConfiguration = (void*) inData; 
     return 0;
 }
 int ss_serialize_transition(void *opaque, void * inTransition, int* outSize, char **outData){
@@ -124,3 +126,9 @@ obp2_language_runtime* obp2_create_runtime() {
 
     return &ss_language_runtime;
 }
+
+int obp2_free_runtime(){
+    // Free the runtime state : 
+
+}
+
