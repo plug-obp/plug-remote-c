@@ -127,8 +127,9 @@ obp2_language_runtime* obp2_create_runtime() {
     return &ss_language_runtime;
 }
 
-int obp2_free_runtime(){
+int obp2_free_runtime(obp2_language_runtime* runtime){
     // Free the runtime state : 
-
+    // ss_free_soup(ss_language_runtime.m_soup); 
+    return 0; 
 }
 
