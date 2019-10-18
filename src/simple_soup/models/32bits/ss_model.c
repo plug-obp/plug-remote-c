@@ -197,10 +197,74 @@ int aA_false_10(ss_state *source) {
     return 0;
 }
 
+//guard action for bit 11
+char gA_true_11(ss_state *source) {
+    return ((source->data>>11) & 1) > 0 && ((TableBits != 0) ? ((TableBits[source->data % BITS_SIZE]>>(11) & 1) > 0) : 1);
+}
+int aA_true_11(ss_state *source) {
+    source->data &= ~ (1 << 11);
+    return 0;
+}
+char gA_false_11(ss_state *source) {
+    return ((source->data>>11) & 1) == 0 && ((TableBits != 0) ? ((TableBits[source->data % BITS_SIZE]>>(11) & 1) > 0) : 1);
+}
+int aA_false_11(ss_state *source) {
+    source->data |= (1 << 11);
+    return 0;
+}
+
+//guard action for bit 12
+char gA_true_12(ss_state *source) {
+    return ((source->data>>12) & 1) > 0 && ((TableBits != 0) ? ((TableBits[source->data % BITS_SIZE]>>(12) & 1) > 0) : 1);
+}
+int aA_true_12(ss_state *source) {
+    source->data &= ~ (1 << 12);
+    return 0;
+}
+char gA_false_12(ss_state *source) {
+    return ((source->data>>12) & 1) == 0 && ((TableBits != 0) ? ((TableBits[source->data % BITS_SIZE]>>(12) & 1) > 0) : 1);
+}
+int aA_false_12(ss_state *source) {
+    source->data |= (1 << 12);
+    return 0;
+}
+
+//guard action for bit 13
+char gA_true_13(ss_state *source) {
+    return ((source->data>>13) & 1) > 0 && ((TableBits != 0) ? ((TableBits[source->data % BITS_SIZE]>>(13) & 1) > 0) : 1);
+}
+int aA_true_13(ss_state *source) {
+    source->data &= ~ (1 << 13);
+    return 0;
+}
+char gA_false_13(ss_state *source) {
+    return ((source->data>>13) & 1) == 0 && ((TableBits != 0) ? ((TableBits[source->data % BITS_SIZE]>>(13) & 1) > 0) : 1);
+}
+int aA_false_13(ss_state *source) {
+    source->data |= (1 << 13);
+    return 0;
+}
+
+//guard action for bit 14
+char gA_true_14(ss_state *source) {
+    return ((source->data>>14) & 1) > 0 && ((TableBits != 0) ? ((TableBits[source->data % BITS_SIZE]>>(14) & 1) > 0) : 1);
+}
+int aA_true_14(ss_state *source) {
+    source->data &= ~ (1 << 14);
+    return 0;
+}
+char gA_false_14(ss_state *source) {
+    return ((source->data>>14) & 1) == 0 && ((TableBits != 0) ? ((TableBits[source->data % BITS_SIZE]>>(14) & 1) > 0) : 1);
+}
+int aA_false_14(ss_state *source) {
+    source->data |= (1 << 14);
+    return 0;
+}
+
 
 
 ss_soup * ss_make_soup() {
-    ss_behavior **behaviors = (ss_behavior **)malloc(22 * sizeof(ss_behavior *));
+    ss_behavior **behaviors = (ss_behavior **)malloc(30 * sizeof(ss_behavior *));
     
     ss_new_behavior(gA_true_0, aA_true_0, &behaviors[0]);
     ss_new_behavior(gA_false_0, aA_false_0, &behaviors[1]);
@@ -235,12 +299,24 @@ ss_soup * ss_make_soup() {
     ss_new_behavior(gA_true_10, aA_true_10, &behaviors[20]);
     ss_new_behavior(gA_false_10, aA_false_10, &behaviors[21]);
 
+    ss_new_behavior(gA_true_11, aA_true_11, &behaviors[22]);
+    ss_new_behavior(gA_false_11, aA_false_11, &behaviors[23]);
+
+    ss_new_behavior(gA_true_12, aA_true_12, &behaviors[24]);
+    ss_new_behavior(gA_false_12, aA_false_12, &behaviors[25]);
+
+    ss_new_behavior(gA_true_13, aA_true_13, &behaviors[26]);
+    ss_new_behavior(gA_false_13, aA_false_13, &behaviors[27]);
+
+    ss_new_behavior(gA_true_14, aA_true_14, &behaviors[28]);
+    ss_new_behavior(gA_false_14, aA_false_14, &behaviors[29]);
+
 
     ss_state *initial = (ss_state*) malloc(sizeof(ss_state));
     initial->data = 0;
     
     ss_soup *soup = NULL;
-    ss_new_soup(initial, behaviors, 22, &soup);
+    ss_new_soup(initial, behaviors, 30, &soup);
 
     free(behaviors);
     return soup;

@@ -2,11 +2,13 @@
 // Created by fourniem on 17/10/19.
 //
 
-#include "bloom_filter.h"
+#include "set.h"
 
 int main(){
 
-    set_t bf;
-    bf.m_newSet(16, &bf);
+    set_t *set = NULL;
+    new_set(set, 6);
+
+    
 
 }
