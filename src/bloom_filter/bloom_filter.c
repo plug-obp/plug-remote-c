@@ -45,6 +45,7 @@ char build_set(set_t *o_set, va_list argp){
 
 void free_set(set_t *set){
     free(((bloom_filter_t*) set->m_opaque)->table);
+    free(set->m_opaque);
 }
 
 char add_item(void* item, set_t *set){
@@ -54,7 +55,7 @@ char add_item(void* item, set_t *set){
     }
     else {
         ((bloom_filter_t*) set->m_opaque)->table[hash >> 3] = (((bloom_filter_t*) set->m_opaque)->table[hash >> 3]) | (0x1 << (hash%8));
-        return 0; 
+        return 1; 
     }
 }
 
