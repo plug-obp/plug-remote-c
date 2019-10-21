@@ -15,3 +15,6 @@ plug_server
 src/reflections/gve_main
 **/*.xcuserstate
 **/*.xcworkspacedata
+**/*.a
+**/*.so
+
