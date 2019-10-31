@@ -5,7 +5,7 @@
 typedef struct iterator_s iterator_t;
 
 struct gve_context_s {
-    obp2_language_runtime *m_runtime;
+    void *m_runtime;
     iterator_t *m_initial_iterator;
     iterator_t *m_next_iterator;
 };
