@@ -23,7 +23,7 @@ struct set_s {
     int m_size;
 };
 
-char new_set(set_t* o_set, ...); 
+char new_set(set_t** o_set, ...);
 
 
 

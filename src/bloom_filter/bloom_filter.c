@@ -24,6 +24,7 @@
 struct bloom_filter_s {
     char* table;
     hashable_callbacks_t m_callbacks;
+
 };
 typedef struct bloom_filter_s bloom_filter_t;
 

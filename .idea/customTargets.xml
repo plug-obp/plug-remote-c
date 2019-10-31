@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CLionExternalBuildManager">
+    <target id="c099bb19-4425-4624-9fc5-d8d514b5d4e5" name="make_build" projectName="plug-remote-c">
+      <configuration id="421a7fde-6785-4e4e-886c-9d9c84d4ec48" name="make_build">
+        <build type="TOOL">
+          <tool actionId="Tool_External Tools_make_clean" />
+        </build>
+        <clean type="TOOL">
+          <tool actionId="Tool_External Tools_make_clean" />
+        </clean>
+      </configuration>
+    </target>
+  </component>
+</project>
