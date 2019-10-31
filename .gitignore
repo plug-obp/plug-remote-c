@@ -15,3 +15,7 @@ plug_server
 src/reflections/gve_main
 **/*.xcuserstate
 **/*.xcworkspacedata
+**/cmake-build-debug/**/*
+
+
+src/simple_soup/models/32bits/ss_model.c
