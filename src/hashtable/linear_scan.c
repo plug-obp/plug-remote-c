@@ -8,6 +8,9 @@
 #include <stdio.h>
 #include "hashtable.h"
 
+#ifndef bf
+
+
 struct hashtable_s
 {
     int m_capacity;
@@ -93,3 +96,54 @@ void lht_print(hashtable_t *table) {
     }
     printf("}\n");
 }
+
+
+#else
+
+struct hashtable_s
+{
+    int m_capacity;
+    int m_size;
+    char* m_items;
+    hashable_callbacks_t m_callbacks;
+};
+
+hashtable_t * lht_new(int capacity, hashable_callbacks_t callbacks) {
+    hashtable_t *tab = malloc(sizeof(hashtable_t));
+
+    tab->m_capacity = capacity;
+    tab->m_size = 0;
+    tab->m_items = malloc(capacity/8);
+    for (int i = 0; i < capacity/8; i ++){
+    	*(tab->m_items+i) = 0;
+    }
+    tab->m_callbacks = callbacks;
+    return tab;
+}
+
+int lht_free(hashtable_t *table) {
+    free(table->m_items);
+    free(table);
+    return 0;
+}
+char lht_add(hashtable_t *table, void *element) {
+    uint64_t hash = table->m_callbacks.m_hash(element);
+    if (table->m_items[(hash >> 3) %table->m_capacity] & (0x1 << (hash%8)) ){
+        return 1;
+    }
+    else {
+        table->m_items[(hash >> 3) %table->m_capacity] = (table->m_items[(hash >> 3) %table->m_capacity]) | (0x1 << (hash%8));
+        return 0;
+    }
+}
+
+int lht_size(hashtable_t *table) {
+    return table->m_size;
+}
+
+void lht_print(hashtable_t *table) {
+
+}
+
+
+#endif

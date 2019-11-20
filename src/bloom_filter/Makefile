@@ -26,4 +26,5 @@ set.o : ../set/set.c
 
 
 clean : 
-	rm -f ./*.o 
+	rm -f ./*.o
+	rm bf_test

@@ -19,7 +19,7 @@ struct open_s {
 open_t * open_create(int size, PrintCb_t printer) {
     open_t *table = malloc(sizeof(open_t));
     if (table == 0) return 0;
-    table->m_items = calloc(size, sizeof(void*));
+    table->m_items = malloc(size*sizeof(void*));
     if (table->m_items == 0) return 0;
     table->m_capacity = size;
     table->m_read_idx = 0;

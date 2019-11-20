@@ -1,12 +1,12 @@
 //#ifdef HASH_TEST
 #include <stdio.h>
 #include "hashtable.h"
-#include "buffer/buffer.h"
-
+#include "buffer.h"
+#include <assert.h>
 
 int main(int argc, char**argv) {
 
-    hashtable_t *table = lht_new(10, buffer_callbacks);
+    hashtable_t *table = lht_new(16, buffer_callbacks);
 
     lht_print(table);
     int e = 43;

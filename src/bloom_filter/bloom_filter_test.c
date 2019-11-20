@@ -4,6 +4,8 @@
 
 #include "set.h"
 #include "buffer.h"
+#include <assert.h>
+
 
 int main(){
 
@@ -16,10 +18,10 @@ int main(){
 		.size = sizeof(int)
     };
 
-    set->m_addItem(&buf, set);
-
-    set->m_contains(&buf, set);
-
+    assert(set->m_contains(&buf, set)==0);
+    assert(set->m_addItem(&buf, set) != 0);
+    assert(set->m_contains(&buf, set) != 0);
+    assert(set->m_addItem(&buf, set) == 0);
     
 
 }
