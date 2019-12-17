@@ -1,16 +1,32 @@
-LIB_DIR=../../lib
-EXE_DIR=../../exe
 
-all: linear_scan.o
 
-test: linear_scan.o hashtable_test_main.o
-	gcc -g ${LIB_DIR}/*.o ${EXE_DIR}/hashtable_test_main.o -o ${EXE_DIR}/hashtable_test.exe
+all : hashtable_test_main.o linear_scan.o murmur3.o buffer.o
+	$(AR)  hashtable_test_main.o linear_scan.o murmur3.o buffer.o test_hashtable.elf
 
-hashtable_test_main.o: hashtable_test_main.c
-	gcc -g ${CC_FLAGS} -I.. -c hashtable_test_main.c -o ${EXE_DIR}/hashtable_test_main.o
+hashtable_test_main.o :
+	$(CC) $(CC_OPTS) -I../hashable -I../hash -I../hash/murmur3 -I../buffer -c hashtable_test_main.c -o hashtable_test_main.o
+linear_scan.o :
+	$(CC) $(CC_OPTS) -I../hashable -I../hash -I../hash/murmur3 -I../buffer -c linear_scan.c -o linear_scan.o
+murmur3.o :
+	$(CC) $(CC_OPTS) -I../hashable -I../hash -I../hash/murmur3 -I../buffer -c ../hash/murmur3/murmur3.c -o murmur3.o
+buffer.o :
+	$(CC) $(CC_OPTS) -I../hashable -I../hash -I../hash/murmur3 -I../buffer -c ../buffer/buffer.c -o buffer.o -DMURMUR3
 
-linear_scan.o: linear_scan.c
-	gcc -g ${CC_FLAGS} -I.. -c linear_scan.c -o ${LIB_DIR}/linear_scan.o
 
-clean:
-	rm -rf ${LIB_DIR}/linear_scan.o ${LIB_DIR}/hashtable_test_main.o ${LIB_DIR}/hashtable_test_main.exe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

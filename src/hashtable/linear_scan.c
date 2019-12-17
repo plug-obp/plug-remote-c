@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include "hashtable.h"
-
+#define bf
 #ifndef bf
 
 
@@ -104,7 +104,7 @@ struct hashtable_s
 {
     int m_capacity;
     int m_size;
-    char* m_items;
+    char *m_items;
     hashable_callbacks_t m_callbacks;
 };
 
@@ -114,8 +114,9 @@ hashtable_t * lht_new(int capacity, hashable_callbacks_t callbacks) {
     tab->m_capacity = capacity;
     tab->m_size = 0;
     tab->m_items = malloc(capacity/8);
-    for (int i = 0; i < capacity/8; i ++){
-    	*(tab->m_items+i) = 0;
+//    printf("Capa : %d", capacity);
+    for (int i = 0; i < capacity/8; i +=4){
+        *((int *)(tab->m_items + i)) = 0;
     }
     tab->m_callbacks = callbacks;
     return tab;
@@ -128,11 +129,13 @@ int lht_free(hashtable_t *table) {
 }
 char lht_add(hashtable_t *table, void *element) {
     uint64_t hash = table->m_callbacks.m_hash(element);
-    if (table->m_items[(hash >> 3) %table->m_capacity] & (0x1 << (hash%8)) ){
+    uint64_t byte_idx = (hash % table->m_capacity) >> 3;
+
+    if (table->m_items[byte_idx] & (0x1 << (hash%8)) ){
         return 1;
     }
     else {
-        table->m_items[(hash >> 3) %table->m_capacity] = (table->m_items[(hash >> 3) %table->m_capacity]) | (0x1 << (hash%8));
+        table->m_items[byte_idx] = (table->m_items[byte_idx]) | (0x1 << (hash%8));
         return 0;
     }
 }

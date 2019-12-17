@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
 
-
-
 set(SRCs
         hashtable_test_main.c
         linear_scan.c
@@ -19,8 +17,6 @@ include_directories(
 
 
 
-
-
 add_executable(test_hashtable ${SRCs})
 add_definitions(-DMURMUR3)
-add_definitions(-DBLOOM_FILTER)
+set_target_properties(test_hashtable PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
