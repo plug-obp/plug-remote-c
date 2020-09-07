@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include "hashtable.h"
-#define bf
+// #define bf
 #ifndef bf
 
 
@@ -136,6 +136,7 @@ char lht_add(hashtable_t *table, void *element) {
     }
     else {
         table->m_items[byte_idx] = (table->m_items[byte_idx]) | (0x1 << (hash%8));
+        table->m_size ++; 
         return 0;
     }
 }

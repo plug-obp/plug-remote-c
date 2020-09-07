@@ -6,7 +6,7 @@ define(`_forloop',
        `$4`'ifelse($1, `$3', ,
 			 `define(`$1', incr($1))_forloop(`$1', `$2', `$3', `$4')')')
 
-define(N,4)
+define(N,15)
 
 define(isFireable, `((TableBits != 0) ? ((TableBits[source->data % BITS_SIZE]>>($1) & 1) > 0) : 1)')  
 

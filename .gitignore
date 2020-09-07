@@ -19,3 +19,7 @@ src/reflections/gve_main
 src/simple_soup/models/32bits/ss_model.c
 **/*.a
 **/*.so
+.idea/workspace.xml
+src/.idea/.name
+src/.idea/workspace.xml
+src/bloom_filter/bf_test
